@@ -32,30 +32,30 @@ void Test2(std::ptrdiff_t aVelikost) {
 }
 
 int main() {
-	cout << "Zacatek programu:" << '\n' << std::flush;	// cout << '\n' << std::flush; je to same jako: cout << std::endl;
+	cout << "Zacatek programu:" << '\n' << '\n' << std::flush;	// cout << '\n' << std::flush; je to same jako: cout << std::endl;
 	try {
 		Test2(100);
 
-		// new double[200000000ul];		<-- Chyba pri alokaci
-		// new double[200000000ul];
+		// new double[200000000ul];		<---| Chyba pri alokaci
+		// new double[200000000ul];			|
 
 
-		int* i = new int;
-		delete i;
+		//int* i = new int;
+		//delete i;
 
 		size_t velikost = 100;
-		TVector vec = { 0,0,nullptr };
+		TVector vector = { 0,0,nullptr };
 
 		try {
-			vec.iData = new double[2 * velikost];
+			vector.iData = new double[2 * velikost];
 		}
 		catch (std::bad_alloc) { throw TAllocExc::EMemory; }
 
-		vec.iSize = velikost;
-		vec.iCapacity = 2 * velikost;
-		delete[] vec.iData;
-		vec.iData = nullptr;
-		vec.iCapacity = vec.iSize = 0;
+		vector.iSize = velikost;
+		vector.iCapacity = 2 * velikost;
+		delete[] vector.iData;
+		vector.iData = nullptr;
+		vector.iCapacity = vector.iSize = 0;
 
 
 		cout << "main try ";
@@ -63,6 +63,6 @@ int main() {
 	catch (std::ptrdiff_t velikost) { cout << "Zaporna velikost! " << velikost << '\n'; }
 	catch (const char* txt) { cout << "Chyba nulove cislo!" << txt << '\n'; }
 	catch (...) { cout << "Nejaka nevyresena vyjimka.'\n'"; }	// catch (...) {} odchyti vsechny vyjimky, ktere doted nebyly odchyceny (musi byt zarazen jako posledni)
-	cout << "Konec programu:";
+	cout << "Konec programu:" << '\n';
 
 }
