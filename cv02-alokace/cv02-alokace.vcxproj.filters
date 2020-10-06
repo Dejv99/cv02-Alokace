@@ -21,9 +21,15 @@
     <ClCompile Include="main-alokace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\checker\check.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Alokace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\checker\check.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

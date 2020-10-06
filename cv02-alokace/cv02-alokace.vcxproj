@@ -139,10 +139,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\checker\check.cpp" />
     <ClCompile Include="alokace.cpp" />
     <ClCompile Include="main-alokace.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\checker\check.h" />
     <ClInclude Include="Alokace.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
