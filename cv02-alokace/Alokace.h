@@ -15,3 +15,5 @@ enum class TAllocExc
 };
 
 void AllocVector( TVector *uk, std::ptrdiff_t delka, double hodnota );
+void DeallocVector(TVector* vector);
+void PrintVector(TVector* vector);

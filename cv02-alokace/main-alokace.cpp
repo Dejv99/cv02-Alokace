@@ -22,12 +22,12 @@ void Test(std::ptrdiff_t aVelikost) {	// std::ptrdiff_t  <-- specialni datovy ty
 
 void Test1(std::ptrdiff_t aVelikost) {
 	Test(aVelikost);
-	cout << "Test1 ";
+	cout << "Test1 " << '\n';
 }
 
 void Test2(std::ptrdiff_t aVelikost) {
 	Test1(aVelikost);
-	cout << "Test2 ";
+	cout << "Test2 " << '\n';
 }
 
 int main() {
@@ -37,31 +37,61 @@ int main() {
 
 		// new double[200000000ul];		<---| Chyba pri alokaci
 		// new double[200000000ul];			|
-
-
-		//int* i = new int;
-		//delete i;
-
+	/*
+		int* i = new int;
+		delete i;
+		
 		size_t velikost = 100;
 		TVector vector = { 0,0,nullptr };
-
+		
 		try {
 			vector.iData = new double[2 * velikost];
 		}
 		catch (std::bad_alloc) { throw TAllocExc::EMemory; }
-
+		
 		vector.iSize = velikost;
 		vector.iCapacity = 2 * velikost;
 		delete[] vector.iData;
 		vector.iData = nullptr;
 		vector.iCapacity = vector.iSize = 0;
+	*/	
 
+		TVector vector = { 200,100,nullptr };
+		try {
+			AllocVector(&vector, vector.iSize, 3);
+		}
+		
+		catch (TAllocExc exception) {
+			if (exception == TAllocExc::EBadParam)
+				std::cout << "Invalid vector address!" << '\n';
+			if (exception == TAllocExc::EFull)
+				std::cout << "Already initialized vector!" << '\n';
+			if (exception == TAllocExc::EMemory)
+				std::cout << "Unsuccessful allocation!" << '\n';
+			if (exception == TAllocExc::ESize)
+				std::cout << "Vector size must be at least 1!" << '\n';
+			exit(1);
+		}
 
-		cout << "main try ";
+		PrintVector(&vector);
+
+		try {
+			DeallocVector(&vector);
+		}
+
+		catch (TAllocExc exception) {
+			if (exception == TAllocExc::EBadParam) {
+				std::cout << "Invalid vector address!" << '\n';
+				exit(1);
+			}
+		}
+
+		cout << "end of main " << '\n';
 	}
-	catch (std::ptrdiff_t velikost) { cout << "Zaporna velikost! " << velikost << '\n'; }
-	catch (const char* txt) { cout << "Chyba nulove cislo!" << txt << '\n'; }
-	catch (...) { cout << "Nejaka nevyresena vyjimka.'\n'"; }	// catch (...) {} odchyti vsechny vyjimky, ktere doted nebyly odchyceny (musi byt zarazen jako posledni)
-	cout << "Konec programu:" << '\n';
+
+	// catch (std::ptrdiff_t velikost) { cout << "Zaporna velikost! " << velikost << '\n'; }
+	// catch (const char* txt) { cout << "Chyba nulove cislo!" << txt << '\n'; }
+	catch (...) { cout << "Nejaka nevyresena vyjimka." << '\n'; }	// catch (...) {} odchyti vsechny vyjimky, ktere doted nebyly odchyceny (musi byt zarazen jako posledni)
+	cout << "Konec programu." << '\n';
 
 }
