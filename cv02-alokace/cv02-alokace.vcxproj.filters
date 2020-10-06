@@ -26,10 +26,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Alokace.h">
+    <ClInclude Include="..\..\checker\check.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\checker\check.h">
+    <ClInclude Include="alokace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

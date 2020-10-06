@@ -1,3 +1,4 @@
+#include <iostream>
 
 struct TVector {
 	size_t iCapacity;
@@ -12,3 +13,5 @@ enum class TAllocExc
 	EBadParam,
 	EFull
 };
+
+void AllocVector( TVector *uk, std::ptrdiff_t delka, double hodnota );
