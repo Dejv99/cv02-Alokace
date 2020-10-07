@@ -55,10 +55,14 @@ int main() {
 		vector.iData = nullptr;
 		vector.iCapacity = vector.iSize = 0;
 	*/	
-		TVector* fp = nullptr;
-		TVector vector = { 200,100,nullptr };
+		double value = 3;
+	//	TVector vector = { 200,100,nullptr };
+		TVector* matrix = nullptr;
+	//	try {
+	//		AllocVector(&vector, vector.iSize, value);
+	//	}
 		try {
-			AllocVector(&vector, vector.iSize, 3);
+			AllocMatrix(&matrix, rows, size, value);
 		}
 		
 		catch (TAllocExc exception) {
@@ -73,15 +77,19 @@ int main() {
 			exit(1);
 		}
 
-		PrintVector(&vector);
+	//	PrintVector(&vector);
+		PrintMatrix(matrix, rows);
 
+	//	try {
+	//		DeallocVector(&vector);
+	//	}
 		try {
-			DeallocVector(&vector);
+			DeallocMatrix(matrix, rows);
 		}
 
 		catch (TAllocExc exception) {
 			if (exception == TAllocExc::EBadParam) {
-				std::cout << "Invalid vector address!" << '\n';
+				std::cout << "An invalid vector/matrix address or number of matrix's rows is <= 0!" << '\n';
 				exit(1);
 			}
 		}

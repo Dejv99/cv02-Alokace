@@ -37,19 +37,31 @@ void PrintVector(TVector* vector)
 	std::cout << '\n';
 }
 
-void AllocMatrix(TVector* matrix, std::ptrdiff_t rows, std::ptrdiff_t lenght, double value) {
-	if (matrix == nullptr)
+void AllocMatrix(TVector** matrix, std::ptrdiff_t rows, std::ptrdiff_t lenght, double value) {
+	if ((*matrix) == nullptr)
 		throw TAllocExc::EBadParam;
-	if (matrix->iData != nullptr)
+	if ((*matrix)->iData != nullptr)
 		throw TAllocExc::EFull;
 	if (lenght <= 0)
 		throw TAllocExc::ESize;
 
-	for (size_t i = 0; i < matrix->iSize; i++)
-		AllocVector(&(matrix[i]), lenght, value);
+	for (std::ptrdiff_t i = 0; i < rows; i++)
+		AllocVector(&((*matrix)[i]), lenght, value);
 
-	if (matrix->iData == nullptr)
+	if ((*matrix)->iData == nullptr)
 		throw TAllocExc::EMemory;
+}
+
+void DeallocMatrix(TVector* matrix, std::ptrdiff_t rows) {
+	if (matrix == nullptr)
+		throw TAllocExc::EBadParam;
+	if (matrix->iData != nullptr)
+		throw TAllocExc::EFull;
+
+	for (std::ptrdiff_t i = 0; i < rows; i++)
+		delete[]((&matrix[i])->iData);
+	delete[] matrix;
+	matrix = nullptr;
 }
 
 void PrintMatrix(TVector* matrix, std::ptrdiff_t rows)
@@ -57,8 +69,8 @@ void PrintMatrix(TVector* matrix, std::ptrdiff_t rows)
 	if (matrix == nullptr || rows <= 0)
 		throw TAllocExc::EBadParam;
 
-	for (size_t i = 0; (signed)i < rows; i++) {
-		for (size_t j = 0; j < (&matrix[i])->iSize; j++)
+	for (std::ptrdiff_t i = 0; (signed)i < rows; i++) {
+		for (size_t j = 0; j < matrix->iSize; j++)
 			std::cout << (&matrix[i])->iData[j] << " ";
 		std::cout << '\n';
 	}
