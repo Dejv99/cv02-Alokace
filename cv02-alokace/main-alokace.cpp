@@ -63,13 +63,13 @@ int main() {
 		
 		catch (TAllocExc exception) {
 			if (exception == TAllocExc::EBadParam)
-				std::cout << "Invalid vector address!" << '\n';
+				std::cout << "An invalid vector address!" << '\n';
 			if (exception == TAllocExc::EFull)
-				std::cout << "Already initialized vector!" << '\n';
+				std::cout << "An already initialized vector!" << '\n';
 			if (exception == TAllocExc::EMemory)
-				std::cout << "Unsuccessful allocation!" << '\n';
+				std::cout << "An unsuccessful allocation!" << '\n';
 			if (exception == TAllocExc::ESize)
-				std::cout << "Vector size must be at least 1!" << '\n';
+				std::cout << "A vector size must be at least 1!" << '\n';
 			exit(1);
 		}
 

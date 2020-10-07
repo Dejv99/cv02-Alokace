@@ -18,8 +18,8 @@ void AllocVector(TVector* uk, std::ptrdiff_t delka, double hodnota)
 	for (size_t i = 0; (signed)i < delka; i++)
 		uk->iData[i] = hodnota;
 
-//	if (uk->iData == nullptr)
-//		throw TAllocExc::EMemory;
+	if (uk->iData == nullptr)
+		throw TAllocExc::EMemory;
 
 }
 
