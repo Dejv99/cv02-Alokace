@@ -12,7 +12,7 @@ using std::cout;
 
 3)	Vyreseni vyjimky v sekci catch - zde je mozne pracovat s promennou vytvorenou pomoci throw, ktera obsahuje data s popisem chyby a podle techto dat se zachovat.
 */
-
+/*
 void Test(std::ptrdiff_t aVelikost) {	// std::ptrdiff_t  <-- specialni datovy typ o velikosti int pro alokaci pameti 
 	if (aVelikost < 0)
 		throw aVelikost;
@@ -29,14 +29,14 @@ void Test2(std::ptrdiff_t aVelikost) {
 	Test1(aVelikost);
 	cout << "Test2 " << '\n';
 }
-
+*/
 int main() {
 	cout << "Zacatek programu:" << '\n' << '\n' << std::flush;	// cout << '\n' << std::flush; je to same jako: cout << std::endl;
 	try {
-		Test2(100);
+	//	Test2(100);
 
-		// new double[200000000ul];		<---| Chyba pri alokaci
-		// new double[200000000ul];			|
+	//	new double[200000000ul];		<---| Chyba pri alokaci
+	//	new double[200000000ul];			|
 	/*
 		int* i = new int;
 		delete i;
@@ -55,7 +55,7 @@ int main() {
 		vector.iData = nullptr;
 		vector.iCapacity = vector.iSize = 0;
 	*/	
-
+		TVector* fp = nullptr;
 		TVector vector = { 200,100,nullptr };
 		try {
 			AllocVector(&vector, vector.iSize, 3);
@@ -89,8 +89,8 @@ int main() {
 		cout << "end of main " << '\n';
 	}
 
-	// catch (std::ptrdiff_t velikost) { cout << "Zaporna velikost! " << velikost << '\n'; }
-	// catch (const char* txt) { cout << "Chyba nulove cislo!" << txt << '\n'; }
+//	catch (std::ptrdiff_t velikost) { cout << "Zaporna velikost! " << velikost << '\n'; }
+//	catch (const char* txt) { cout << "Chyba nulove cislo!" << txt << '\n'; }
 	catch (...) { cout << "Nejaka nevyresena vyjimka." << '\n'; }	// catch (...) {} odchyti vsechny vyjimky, ktere doted nebyly odchyceny (musi byt zarazen jako posledni)
 	cout << "Konec programu." << '\n';
 

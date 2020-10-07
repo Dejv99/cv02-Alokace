@@ -1,25 +1,26 @@
 #include "Alokace.h"
 #include "c:\GitHub\BPC-PPC\checker\check.h"
+/*
+void AllocMatrix(TVector* matrix, std::ptrdiff_t rows, std::ptrdiff_t lenght, double value) {
 
-void AllocVector(TVector* uk, std::ptrdiff_t delka, double hodnota)
+}
+*/
+void AllocVector(TVector* vector, std::ptrdiff_t lenght, double value)
 {
-	if (uk->iData != nullptr) 
-		throw TAllocExc::EFull;
-	if (delka <= 0)
-		throw TAllocExc::ESize;
-	if (uk == nullptr)
+	if (vector == nullptr)
 		throw TAllocExc::EBadParam;
-
-	uk->iData = new double[delka];
-
-	if (uk->iData == nullptr)
+	if (vector->iData != nullptr) 
+		throw TAllocExc::EFull;
+	if (lenght <= 0)
+		throw TAllocExc::ESize;
+	//int a = lock_alloc(1);				// Jak predat klic?
+	vector->iData = new double[lenght];
+	//unlock_alloc(a);
+	if (vector->iData == nullptr)
 		throw TAllocExc::EMemory;
 	
-	for (size_t i = 0; (signed)i < delka; i++)
-		uk->iData[i] = hodnota;
-
-	if (uk->iData == nullptr)
-		throw TAllocExc::EMemory;
+	for (size_t i = 0; (signed)i < lenght; i++)
+		vector->iData[i] = value;
 
 }
 
