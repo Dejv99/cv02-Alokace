@@ -63,9 +63,9 @@ int main() {
 		
 		catch (TAllocExc exception) {
 			if (exception == TAllocExc::EBadParam)
-				std::cout << "An invalid vector address!" << '\n';
+				std::cout << "An invalid vector/matrix address or number of matrix's rows is <= 0!" << '\n';
 			if (exception == TAllocExc::EFull)
-				std::cout << "An already initialized vector!" << '\n';
+				std::cout << "An already initialized vector/matrix!" << '\n';
 			if (exception == TAllocExc::EMemory)
 				std::cout << "An unsuccessful allocation!" << '\n';
 			if (exception == TAllocExc::ESize)
