@@ -6,16 +6,16 @@
 
 void AllocVector(TVector* vector, std::ptrdiff_t lenght, double value)
 {
-	if (vector == nullptr)
+	if (!vector)
 		throw TAllocExc::EBadParam;
-	if (vector->iData != nullptr) 
+	if (vector->iData) 
 		throw TAllocExc::EFull;
 	if (lenght <= 0)
 		throw TAllocExc::ESize;
-	//int a = lock_alloc(1);				// Jak predat klic?
+	//size_t a = lock_alloc(1);				// Jak predat klic? - pomoci size_t
 	vector->iData = new double[lenght];
 	//unlock_alloc(a);
-	if (vector->iData == nullptr)
+	if (!vector->iData)
 		throw TAllocExc::EMemory;
 
 	vector->iSize = lenght;
@@ -26,7 +26,7 @@ void AllocVector(TVector* vector, std::ptrdiff_t lenght, double value)
 
 void DeallocVector(TVector* vector)
 {
-	if (vector == nullptr || vector->iData == nullptr)
+	if (!vector || !vector->iData)
 		throw TAllocExc::EBadParam;
 
 	delete[] vector->iData;
@@ -35,7 +35,7 @@ void DeallocVector(TVector* vector)
 
 void PrintVector(TVector* vector)
 {
-	if (vector == nullptr)
+	if (!vector)
 		throw TAllocExc::EBadParam;
 
 	for (size_t i = 0; i < vector->iSize; i++)
@@ -47,7 +47,7 @@ void PrintVector(TVector* vector)
 // -------------------MATRIX------------------- //
 
 void AllocMatrix(TVector** matrix, std::ptrdiff_t rows, std::ptrdiff_t lenght, double value) {
-	if (matrix == nullptr || rows <= 0)
+	if (!matrix || rows <= 0)
 		throw TAllocExc::EBadParam;
 	if (lenght <= 0)
 		throw TAllocExc::ESize;
@@ -59,12 +59,12 @@ void AllocMatrix(TVector** matrix, std::ptrdiff_t rows, std::ptrdiff_t lenght, d
 	for (std::ptrdiff_t i = 0; i < rows; i++)
 		AllocVector(&((*matrix)[i]), lenght, value);
 
-	if ((*matrix)->iData == nullptr)
+	if (!(*matrix)->iData)
 		throw TAllocExc::EMemory;
 }
 
 void DeallocMatrix(TVector* matrix, std::ptrdiff_t rows) {
-	if (matrix == nullptr || rows <= 0)
+	if (!matrix || rows <= 0)
 		throw TAllocExc::EBadParam;
 
 	for (std::ptrdiff_t i = 0; i < rows; i++)
@@ -75,7 +75,7 @@ void DeallocMatrix(TVector* matrix, std::ptrdiff_t rows) {
 
 void PrintMatrix(TVector* matrix, std::ptrdiff_t rows)
 {
-	if (matrix == nullptr || rows <= 0)
+	if (!matrix || rows <= 0)
 		throw TAllocExc::EBadParam;
 
 	for (std::ptrdiff_t i = 0; (signed)i < rows; i++) {
