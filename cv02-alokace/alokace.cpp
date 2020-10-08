@@ -53,8 +53,8 @@ void AllocMatrix(TVector** matrix, std::ptrdiff_t rows, std::ptrdiff_t lenght, d
 		throw TAllocExc::ESize;
 
 	*matrix = new TVector[rows];
-	for (std::ptrdiff_t i = 0; i < rows; i++)
-		((*matrix)[i]).iData = nullptr;
+	/*for (std::ptrdiff_t i = 0; i < rows; i++)	// Inicializace uz je hotova v definici struktury TVector
+		((*matrix)[i]).iData = nullptr;*/		//
 
 	for (std::ptrdiff_t i = 0; i < rows; i++)
 		AllocVector(&((*matrix)[i]), lenght, value);
