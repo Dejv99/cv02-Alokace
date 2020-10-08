@@ -5,9 +5,9 @@ const std::ptrdiff_t rows = 3;
 const std::ptrdiff_t size = 6;
 
 struct TVector {
-	size_t iCapacity;
-	size_t iSize;
-	double* iData;
+	size_t iCapacity = 0;		//
+	size_t iSize = 0;			// Inicializace v definici
+	double* iData = nullptr;	//
 };
 
 enum class TAllocExc
