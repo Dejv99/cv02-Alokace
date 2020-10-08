@@ -13,25 +13,21 @@ void AllocVector(TVector* vector, std::ptrdiff_t lenght, double value)
 	if (lenght <= 0)
 		throw TAllocExc::ESize;
 
-	try
-	{
-		while (true)
-			vector->iData = new double[100000000ul];
-	}
+	//try
+	//{
+	//	while (true)
+	//		vector->iData = new double[100000000ul];			// Gererovani vyjimky kdyz nastane chybna alokace - NEFUNGUJE...
+	//}
 
-	catch (const std::bad_alloc& e)
-	{
-		std::cout << "Allocation failed: " << e.what() << '\n';
-	}
+	//catch (const std::bad_alloc& e)
+	//{
+	//	std::cout << "Allocation failed: " << e.what() << '\n';
+	//}
+	
+	vector->iData = new double[lenght];
 
-	size_t a = lock_alloc(1);				// 
-	vector->iData = new double[lenght];		//
-											//
-	if (!vector->iData)						// Gererovani vyjimky kdyz nastane chybna alokace - dodelat!
-	{										//
-		unlock_alloc(a);					//
-		throw TAllocExc::EMemory;			//
-	}										//
+	if (!vector->iData)
+		throw TAllocExc::EMemory;
 
 	vector->iSize = lenght;
 	vector->iCapacity = 2 * lenght;
