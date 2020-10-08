@@ -13,14 +13,16 @@ void AllocVector(TVector* vector, std::ptrdiff_t lenght, double value)
 	if (lenght <= 0)
 		throw TAllocExc::ESize;
 
-	/*try {
-		while (true) {
+	try
+	{
+		while (true)
 			vector->iData = new double[100000000ul];
-		}
 	}
-	catch (const std::bad_alloc& e) {
+
+	catch (const std::bad_alloc& e)
+	{
 		std::cout << "Allocation failed: " << e.what() << '\n';
-	}*/
+	}
 
 	size_t a = lock_alloc(1);				// 
 	vector->iData = new double[lenght];		//
@@ -59,7 +61,8 @@ void PrintVector(TVector* vector)
 
 // -------------------MATRIX------------------- //
 
-void AllocMatrix(TVector** matrix, std::ptrdiff_t rows, std::ptrdiff_t lenght, double value) {
+void AllocMatrix(TVector** matrix, std::ptrdiff_t rows, std::ptrdiff_t lenght, double value)
+{
 	if (!matrix || rows <= 0)
 		throw TAllocExc::EBadParam;
 	if (lenght <= 0)
@@ -76,7 +79,8 @@ void AllocMatrix(TVector** matrix, std::ptrdiff_t rows, std::ptrdiff_t lenght, d
 		throw TAllocExc::EMemory;
 }
 
-void DeallocMatrix(TVector* matrix, std::ptrdiff_t rows) {
+void DeallocMatrix(TVector* matrix, std::ptrdiff_t rows)
+{
 	if (!matrix || rows <= 0)
 		throw TAllocExc::EBadParam;
 
@@ -91,7 +95,8 @@ void PrintMatrix(TVector* matrix, std::ptrdiff_t rows)
 	if (!matrix || rows <= 0)
 		throw TAllocExc::EBadParam;
 
-	for (std::ptrdiff_t i = 0; (signed)i < rows; i++) {
+	for (std::ptrdiff_t i = 0; (signed)i < rows; i++)
+	{
 		for (size_t j = 0; j < (matrix[i]).iSize; j++)
 			std::cout << (matrix[i]).iData[j] << " ";
 		std::cout << '\n';

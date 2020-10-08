@@ -4,7 +4,8 @@ const double value = 3;
 const std::ptrdiff_t rows = 3;
 const std::ptrdiff_t size = 6;
 
-struct TVector {
+struct TVector
+{
 	size_t iCapacity = 0;		//
 	size_t iSize = 0;			// Inicializace v definici
 	double* iData = nullptr;	//

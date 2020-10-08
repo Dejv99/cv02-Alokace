@@ -18,19 +18,22 @@ using std::cout;
 */
 
 #ifdef EXCEPTION_EXAMPLE
-void Test(std::ptrdiff_t aVelikost) {	// std::ptrdiff_t  <-- specialni datovy typ o velikosti int pro alokaci pameti 
+void Test(std::ptrdiff_t aVelikost)		// std::ptrdiff_t  <-- specialni datovy typ o velikosti int pro alokaci pameti 
+{
 	if (aVelikost < 0)
 		throw aVelikost;
 	if (aVelikost == 0)
 		throw "Hodnota je nula!";
 }
 
-void Test1(std::ptrdiff_t aVelikost) {
+void Test1(std::ptrdiff_t aVelikost)
+{
 	Test(aVelikost);
 	cout << "Test1 " << '\n';
 }
 
-void Test2(std::ptrdiff_t aVelikost) {
+void Test2(std::ptrdiff_t aVelikost)
+{
 	Test1(aVelikost);
 	cout << "Test2 " << '\n';
 }
@@ -39,7 +42,8 @@ void Test2(std::ptrdiff_t aVelikost) {
 int main() {
 	cout << "Zacatek programu:" << '\n' << std::flush;	// cout << '\n' << std::flush; je to same jako: cout << std::endl;
 #ifdef EXCEPTION_EXAMPLE
-	try {
+	try
+	{
 		Test2(100);
 
 	//	new double[200000000ul];		<---| Chyba pri alokaci
@@ -48,9 +52,7 @@ int main() {
 		size_t velikost = 100;
 		TVector vec = { 0,0,nullptr };
 		
-		try {
-			vec.iData = new double[2 * velikost];
-		}
+		try { vec.iData = new double[2 * velikost]; }
 		catch (std::bad_alloc) { throw TAllocExc::EMemory; }
 		
 		vec.iSize = velikost;
@@ -63,11 +65,10 @@ int main() {
 #ifdef VECTOR
 	TVector vector = { 200,100,nullptr };
 
-	try {
-		AllocVector(&vector, vector.iSize, value);
-	}
+	try { AllocVector(&vector, vector.iSize, value); }
 
-	catch (TAllocExc exception) {
+	catch (TAllocExc exception)
+	{
 		if (exception == TAllocExc::EBadParam)
 			std::cout << "An invalid vector/matrix address or number of matrix's rows is <= 0!" << '\n';
 		if (exception == TAllocExc::EFull)
@@ -81,12 +82,12 @@ int main() {
 
 	PrintVector(&vector);
 
-	try {
-		DeallocVector(&vector);
-	}
+	try{ DeallocVector(&vector); }
 
-	catch (TAllocExc exception) {
-		if (exception == TAllocExc::EBadParam) {
+	catch (TAllocExc exception)
+	{
+		if (exception == TAllocExc::EBadParam)
+		{
 			std::cout << "An invalid vector/matrix address or number of matrix's rows is <= 0!" << '\n';
 			exit(1);
 		}
@@ -97,11 +98,10 @@ int main() {
 
 #ifdef MATRIX
 	TVector* matrix = nullptr;
-	try {
-		AllocMatrix(&matrix, rows, size, value);
-	}
+	try { AllocMatrix(&matrix, rows, size, value); }
 
-	catch (TAllocExc exception) {
+	catch (TAllocExc exception)
+	{
 		if (exception == TAllocExc::EBadParam)
 			std::cout << "An invalid vector/matrix address or number of matrix's rows is <= 0!" << '\n';
 		if (exception == TAllocExc::EFull)
@@ -115,12 +115,12 @@ int main() {
 
 	PrintMatrix(matrix, rows);
 
-	try {
-		DeallocMatrix(matrix, rows);
-	}
+	try { DeallocMatrix(matrix, rows); }
 
-	catch (TAllocExc exception) {
-		if (exception == TAllocExc::EBadParam) {
+	catch (TAllocExc exception)
+	{
+		if (exception == TAllocExc::EBadParam)
+		{
 			std::cout << "An invalid vector/matrix address or number of matrix's rows is <= 0!" << '\n';
 			exit(1);
 		}
